@@ -1,0 +1,6 @@
+Ansible is an open source software for configuration management and application deployment . The automation of running or installing a software or deploying an application is
+done using playbooks which are written in YAML. 
+
+
+Useful websites:
+Ansible galaxy 
