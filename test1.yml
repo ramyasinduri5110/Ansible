@@ -1,0 +1,14 @@
+---
+
+- name: Appending text intp text file
+  hosts: test_nagios
+  tasks:
+    - name: append text
+      lineinfile:
+        dest: /home/rkondepu/test.txt
+        line: " demo to show how to add the text information to a file"
+        state: present
+        insertafter: EOF
+      become: True
+      become_user: root
+      register: found
