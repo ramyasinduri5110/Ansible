@@ -1,0 +1,10 @@
+---
+- name: Copy a file from source and execute the file
+  hosts: test_nagios
+  become: true
+  become_user: root
+  tasks:
+  - name : copying the file
+    copy: src=/home/rkondepu/playbook/tomcat.sh  dest=/home/rkondepu/playbook
+  - name : Execute the file
+    command: sh /home/rkondepu/playbook.tomcat.sh
