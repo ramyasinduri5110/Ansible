@@ -1,0 +1,14 @@
+- name: copy files from source to destination
+  hosts: test_nagios
+  tasks:
+    - name: copy files to index.html
+      copy:
+        dest: /omd/sites/ssnomd/lib64/nagios/plugins/ssn/check_oracle_standby.py
+        src: /home/rkondepu/playbook/check_oracle_standby.py
+        owner: ssnomd
+        group: ssnomd
+        mode: 0755
+
+      become: True
+      become_user: root
+      register: found
