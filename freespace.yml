@@ -1,0 +1,14 @@
+---
+ - name: Notify if spaces exceeds
+   hosts: test_nagios
+   become: true
+   become_user: root
+   tasks:
+   - name: getting output
+     shell: df /tmp --output\=avail
+     register: freespace_available
+     tags: getspace_info
+   - name: clear space
+     shell: '> /home/rkondepu/test.txt'
+     when: freespace_available >5000
+     tags: clearspace
