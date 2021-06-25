@@ -1,0 +1,10 @@
+---
+- name: Installing Apache Package and start the service
+  hosts: test_nagios
+  become: true
+  become_user: root
+  tasks:
+  - name: Install httpd package
+    yum: name=httpd state=present
+  - name: start service
+    service: name=httpd state=started
