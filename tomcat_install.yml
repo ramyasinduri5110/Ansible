@@ -1,0 +1,10 @@
+---
+- name: Installing and starting Tomcat server
+  hosts: test_nagios
+  become: True
+  become_user: root
+  tasks:
+  - name: Install Tomcat Server
+    yum : name=tomcat state=present
+  - name: Starting the tomcat service
+    service: name=tomcat service=started
