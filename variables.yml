@@ -1,0 +1,24 @@
+---
+- name: Introduction to variables
+  hosts: "{{nodes}}"
+  become: true
+  become_user: root
+  vars:
+    src_path: /home/rkondepu/playbook
+    dest_path: /home/rkondepu
+    nodes: test_nagios
+  tasks:
+    - name: Install httpd package
+      yum: name=httpd state=present
+      tags: installation_play
+    - name: Start the service
+      service: name=httpd state=started
+      tags: service_play
+    - name: copying the file
+      copy: src={{src_path}}/index.html dest={{dest_path}}
+      notify: restart httpd
+      tags: copy_play
+  handlers:
+    - name: restart httpd
+      service: name=httpd state=restarted
+      tags: handler_play
