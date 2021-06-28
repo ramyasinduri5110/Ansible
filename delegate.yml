@@ -1,0 +1,17 @@
+---
+- name: Delegating in Ansible
+  hosts: test_nagios
+  become: true
+  become_user: root
+  tasks:
+  - name: find the uptime
+    command: uptime
+    register: up_time
+    tags: uptime_play
+  - name: finding file system utilization
+    command: df -kh /tmp
+    register: fs_util
+    tags: util_play
+  - name: write to a file
+    lineinfile: dest=/home/rkondepu/output.txt create=yes line={{up_time.stdout,free.stdout}}
+    delegate_to: 10.29.12.185
